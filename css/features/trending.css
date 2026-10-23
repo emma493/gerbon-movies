@@ -1,0 +1,80 @@
+/* css/features/trending.css — 1:1 NudiTok /trending?metric=saved
+ * (refs/trending page/Trending_ Most Saved). Desktop top header + left
+ * side menu (lg only), mobile back pill, H1, metric pills, window pills,
+ * 3-col 9/16 tiles with play + heart counts. Literal palette:
+ * surface #121212, elevated #1e1e1e, border #2f2f2f, primary #fe2c55. */
+.sx-trending { position: fixed; inset: 0; z-index: 940; display: block; background: #121212; overflow-y: auto; overscroll-behavior: contain; }
+.sx-trending[hidden] { display: none; }
+
+/* --- desktop top header (lg only, h-16) --- */
+.sx-t-head { display: none; }
+@media (min-width: 1024px) {
+  .sx-t-head { display: flex; position: fixed; top: 0; left: 0; right: 0; z-index: 40; height: 64px; align-items: center; justify-content: space-between; border-bottom: 1px solid #2f2f2f; background: rgba(18,18,18,.8); backdrop-filter: blur(12px); padding: 0 24px; }
+}
+.sx-t-logo { display: flex; align-items: center; gap: 8px; font-size: 20px; font-weight: 700; color: #fe2c55; background: none; border: none; cursor: pointer; padding: 0; }
+.sx-t-search { display: flex; align-items: center; max-width: 28rem; width: 100%; margin: 0 32px; }
+.sx-t-search-box { position: relative; width: 100%; }
+.sx-t-search-box svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: #8a8a8a; pointer-events: none; }
+.sx-t-search-box input { display: flex; height: 40px; width: 100%; border: 1px solid #2f2f2f; padding: 8px 12px 8px 40px; font-size: 14px; color: #fff; background: #1e1e1e; border-radius: 9999px; outline: none; }
+.sx-t-search-box input::placeholder { color: #8a8a8a; }
+.sx-t-login { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #c9213f; color: #fff; border: none; border-radius: 6px; height: 32px; padding: 0 12px; font: inherit; font-size: 12px; font-weight: 500; cursor: pointer; white-space: nowrap; }
+.sx-t-login:hover { background: #b01d38; }
+.sx-t-login svg { width: 16px; height: 16px; margin-right: 8px; }
+
+/* --- desktop side menu (lg only, w-60) --- */
+.sx-t-side { display: none; }
+@media (min-width: 1024px) {
+  .sx-t-side { display: flex; position: fixed; left: 0; top: 64px; bottom: 0; width: 240px; flex-direction: column; border-right: 1px solid #2f2f2f; background: #121212; z-index: 30; padding: 16px; overflow-y: auto; overscroll-behavior: contain; }
+}
+/* Folder pages use real anchors (SEO) with the same chrome: kill underlines. */
+a.sx-t-navlink, a.sx-t-sidelogin { text-decoration: none; }
+/* Generic folder-page body offset for the fixed w-60 desktop sidebar. */
+.sx-t-page-offset { min-height: 100vh; background: #121212; padding-top: 64px; }
+@media (min-width: 1024px) { .sx-t-page-offset { padding-left: 240px; } }
+.sx-t-nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.sx-t-navlink { display: flex; align-items: center; gap: 12px; border: none; border-radius: 6px; padding: 10px 12px; font-size: 14px; font-weight: 500; cursor: pointer; background: none; color: #a0a0a0; text-align: left; width: 100%; }
+.sx-t-navlink:hover { background: #2a2a2a; color: #fff; }
+.sx-t-navlink.on { background: #1e1e1e; color: #fe2c55; }
+.sx-t-navlink svg { width: 20px; height: 20px; flex: none; }
+.sx-t-sidefoot { border-top: 1px solid #2f2f2f; padding-top: 16px; margin-top: 16px; }
+.sx-t-sidelogin { display: flex; align-items: center; gap: 12px; border: none; border-radius: 6px; padding: 10px 12px; font: inherit; font-size: 14px; font-weight: 500; width: 100%; background: none; color: #fe2c55; cursor: pointer; text-align: left; }
+.sx-t-sidelogin:hover { background: #2a2a2a; }
+.sx-t-sidelogin svg { width: 20px; height: 20px; }
+.sx-t-legal { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: #8a8a8a; }
+.sx-t-legal a, .sx-t-legal button { color: inherit; background: none; border: none; padding: 0; font-size: inherit; cursor: pointer; text-decoration: none; }
+.sx-t-legal a:hover, .sx-t-legal button:hover { text-decoration: underline; }
+
+/* --- page body --- */
+.sx-trending-back { position: fixed; left: 8px; top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 40; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 44px; width: auto; padding: 0 16px 0 12px; border-radius: 9999px; background: rgba(0,0,0,.45); backdrop-filter: blur(8px); color: #fff; border: none; cursor: pointer; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.sx-trending-back .sx-back-arrow { color: #fe2c55; display: inline-flex; }
+@media (min-width: 1024px) { .sx-trending-back { display: none; } }
+/* Mobile menu pill — same system drawer as index.html #menu-btn. */
+.sx-t-menumob { position: fixed; right: 8px; top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 40; display: inline-flex; align-items: center; justify-content: center; height: 44px; width: 44px; border-radius: 9999px; background: rgba(0,0,0,.45); backdrop-filter: blur(8px); color: #fff; border: none; cursor: pointer; }
+@media (min-width: 1024px) { .sx-t-menumob { display: none; } }
+.sx-t-page { min-height: 100vh; background: #121212; padding-top: 64px; padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+@media (min-width: 1024px) { .sx-t-page { padding-bottom: 0; padding-left: 240px; } }
+.sx-t-wrap { max-width: 56rem; margin: 0 auto; padding: 24px 16px; }
+.sx-t-h1 { color: #fff; font-size: 24px; line-height: 32px; font-weight: 700; margin: 0 0 16px; }
+.sx-t-metrics { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.sx-t-metric { padding: 6px 16px; border: none; border-radius: 9999px; font-size: 14px; font-weight: 500; cursor: pointer; background: #1e1e1e; color: #a0a0a0; }
+.sx-t-metric:hover { color: #fff; }
+.sx-t-metric.on { background: #c9213f; color: #fff; }
+.sx-t-windows { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.sx-t-window { padding: 4px 12px; border: none; border-radius: 9999px; font-size: 12px; font-weight: 500; cursor: pointer; background: none; color: #8a8a8a; }
+.sx-t-window:hover { color: #a0a0a0; }
+.sx-t-window.on { background: rgba(255,255,255,.15); color: #fff; box-shadow: 0 0 0 1px rgba(255,255,255,.2); }
+.sx-trending-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; align-content: start; }
+@media (min-width: 1024px) { .sx-trending-grid { gap: 8px; } }
+.sx-rank { position: relative; aspect-ratio: 9/16; background: #1e1e1e; border-radius: 4px; overflow: hidden; border: none; padding: 0; cursor: pointer; display: block; width: 100%; }
+.sx-rank img, .sx-rank video { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Real-frame thumbnails: video file paints its first frame like an image. */
+.sx-rank video { width: 100%; height: 100%; object-fit: cover; display: block; background: #000; pointer-events: none; }
+.sx-thumb-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e1e1e, #121212); color: #fe2c55; font-size: 24px; font-weight: 800; }
+.sx-rank-shimmer { position: absolute; inset: 0; background: #27272a; border-radius: 4px; }
+.sx-rank-hover { position: absolute; inset: 0; background: rgba(0,0,0,0); }
+.sx-rank:hover .sx-rank-hover { background: rgba(0,0,0,.1); }
+.sx-rank-cap { position: absolute; left: 4px; right: 4px; bottom: 4px; display: flex; align-items: center; justify-content: space-between; color: #fff; font-size: 12px; text-shadow: 0 1px 3px rgba(0,0,0,.8), 0 0 8px rgba(0,0,0,.4); }
+.sx-rank-cap > div { display: flex; align-items: center; gap: 4px; }
+.sx-rank-cap svg { width: 14px; height: 14px; }
+.sx-t-tail { height: 16px; }
+.sx-trending-empty { grid-column: 1/-1; color: #8a8a8a; font-size: 14px; text-align: center; padding: 32px 16px; line-height: 1.6; }

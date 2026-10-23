@@ -1,0 +1,78 @@
+/* css/features/prefs.css — first-visit content-preference popup + reopenable
+ * from the side menu. Compact card: title + three equal buttons
+ * (Girls / Couples / All). Shown once per visitor until a choice is made. */
+
+.sx-prefs-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 960;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.sx-prefs-backdrop.open {
+  opacity: 1;
+  visibility: visible;
+}
+.sx-prefs-card {
+  width: 100%;
+  max-width: 300px;
+  background: #1e1e1e;
+  border: 1px solid #2f2f2f;
+  border-radius: 16px;
+  padding: 18px 16px 16px;
+  text-align: center;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  transform: translateY(8px) scale(0.98);
+  transition: transform 0.25s ease;
+}
+.sx-prefs-backdrop.open .sx-prefs-card {
+  transform: translateY(0) scale(1);
+}
+.sx-prefs-title {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0;
+}
+.sx-prefs-options {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+.sx-prefs-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  padding: 12px 6px;
+  border-radius: 12px;
+  border: 1px solid #2f2f2f;
+  background: #121212;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+.sx-prefs-option:active {
+  transform: scale(0.97);
+}
+.sx-prefs-option.picked {
+  border-color: #fe2c55;
+  background: rgba(254, 44, 85, 0.12);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sx-prefs-backdrop,
+  .sx-prefs-card {
+    transition: none;
+  }
+}

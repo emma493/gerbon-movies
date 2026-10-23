@@ -1,0 +1,249 @@
+/* css/features/player.css — phone fills the screen (cover, TikTok-style);
+ * wide screens letterbox (contain) so the video never stretches wide.
+ * The column stays phone-width (max 480px) on desktop.
+ *
+ * STATIC STAGE: the player lives in the boot section and NEVER moves
+ * (reparenting hid video on some devices). The boot screen sticks while
+ * transparent spacer sections scroll beneath it; activation only swaps the
+ * video source, like a plain inline <video>. Below every overlay (min
+ * overlay z is 40+), above page content. */
+.snap-feed > [data-boot] {
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  z-index: 20;
+}
+.snap-feed .sx-spacer {
+  pointer-events: none;
+  background: transparent;
+}
+.sx-tile-fallback { color: #fe2c55; }
+#main-video,
+.sx-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  background: #000;
+  pointer-events: auto;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  #main-video,
+  .sx-video {
+    object-fit: contain;
+  }
+}
+
+/* TikTok-style loader (ported from refs/shortieshub_app_fix, namespaced):
+ * pink + cyan dual circles, screen blend, counter-translate. Shown over the
+ * thumbnail while the video gets ready; hidden on playing/canplay. */
+.sx-loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 20px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+.sx-loader::before,
+.sx-loader::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  animation: sx-tiktok-tight 0.8s infinite ease-in-out;
+}
+.sx-loader::before {
+  background-color: #ff2b54;
+  animation-name: sx-tiktok-pink;
+}
+.sx-loader::after {
+  background-color: #20d5ec;
+  animation-name: sx-tiktok-cyan;
+}
+@keyframes sx-tiktok-pink {
+  0%,
+  100% {
+    transform: translateX(-8px) scale(1);
+    z-index: 1;
+  }
+  50% {
+    transform: translateX(8px) scale(1.1);
+    z-index: 0;
+  }
+}
+@keyframes sx-tiktok-cyan {
+  0%,
+  100% {
+    transform: translateX(8px) scale(1.1);
+    z-index: 0;
+  }
+  50% {
+    transform: translateX(-8px) scale(1);
+    z-index: 1;
+  }
+}
+@keyframes sx-tiktok-tight {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Seek bar (ported, namespaced): invisible range input over the fill so
+ * the whole strip is draggable + keyboard/screen-reader scrubbable; white
+ * fill tracks playback; thumb fades in on hover/drag; strip grows while
+ * the video plays. */
+#ntok-progress {
+  height: 22px;
+}
+#ntok-progress .sx-seek-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  transition: height 0.15s ease;
+}
+#ntok-progress.sx-playing .sx-seek-track {
+  height: 5px;
+}
+#ntok-seek {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  margin: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+#ntok-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#ntok-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+#ntok-progress:hover #ntok-seek::-webkit-slider-thumb,
+#ntok-progress.sx-seeking #ntok-seek::-webkit-slider-thumb,
+#ntok-progress:hover #ntok-seek::-moz-range-thumb,
+#ntok-progress.sx-seeking #ntok-seek::-moz-range-thumb {
+  opacity: 1;
+}
+
+/* "Join my Livestream" button beside the @username: solid brand-pink
+ * with a pink glow. Pointer-events live on the button itself (the parent
+ * overlay is pointer-events-none; the chrome row re-enables them). */
+.sx-see-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 3px 10px 3px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 77, 109, 0.8);
+  background: #FF2B55;
+  box-shadow:
+    0 0 14px rgba(255, 43, 85, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  cursor: pointer;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.2s ease, background 0.2s ease, transform 0.1s ease;
+}
+.sx-see-more:hover {
+  background: #ff4569;
+  border-color: rgba(255, 109, 135, 0.9);
+  box-shadow:
+    0 0 20px rgba(255, 43, 85, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.sx-see-more:active {
+  transform: scale(0.97);
+}
+.sx-see-more:focus-visible {
+  outline: 2px solid rgba(255, 107, 133, 0.9);
+  outline-offset: 2px;
+}
+
+/* "LIVE" indicator dot inside the Join-my-Livestream button: white dot on
+ * the pink fill with a soft white glow + pulse, so it reads as a real live
+ * broadcast (CTR cue). Static white dot under prefers-reduced-motion. */
+.sx-live-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #ffffff;
+  box-shadow:
+    0 0 6px 1px rgba(255, 255, 255, 0.8),
+    0 0 12px 3px rgba(255, 255, 255, 0.35);
+  animation: sx-live-pulse 1.6s ease-in-out infinite;
+}
+@keyframes sx-live-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.75;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sx-live-dot {
+    animation: none;
+  }
+}
+
+/* Rail mute + install buttons below Share (previous-version FA icons). */
+.sx-rail-mute-icon,
+.sx-rail-install-icon {
+  font-size: 27px;
+  color: #fff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  transition: opacity 0.15s ease;
+}
+#sx-rail-mute:focus-visible,
+#sx-rail-install:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+  border-radius: 8px;
+}

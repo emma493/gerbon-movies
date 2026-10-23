@@ -1,0 +1,4 @@
+/* css/features/pwa.css — install banner (was inline in pwa-banner.js).
+ * Kept as classes; JS still sets layout inline for now so banner works
+ * even if this file 404s. */
+#pwa-banner { position: fixed; left: 12px; right: 12px; bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px)); z-index: 85; max-width: 456px; margin: 0 auto; }

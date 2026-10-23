@@ -1,0 +1,43 @@
+/* css/effects.css — keyframes moved out of index.html inline <style>. */
+@keyframes livecam-glow {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(255, 43, 85, 0.55)); }
+  50% { transform: scale(1.22); filter: drop-shadow(0 0 9px rgba(255, 43, 85, 1)); }
+}
+.livecam-glow { animation: livecam-glow 1.6s ease-in-out infinite; }
+.sx-big-heart {
+  position: fixed;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  z-index: 80;
+  pointer-events: none;
+  transition: transform 0.25s ease-out, opacity 0.4s ease-out;
+}
+.sx-big-heart-show { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+.sx-big-heart-fade { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+/* Center-screen tap feedback (play/pause flash). Ported from the previous
+ * site's .feedback-icon + icon-pop (refs/shortieshub_app_fix/style.css). */
+.sx-tap-flash {
+  position: fixed;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.6);
+  pointer-events: none;
+  z-index: 85;
+  animation: sx-icon-pop 0.6s ease-out forwards;
+}
+@keyframes sx-icon-pop {
+  0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+/* Rail-heart bounce on like toggle. Ported from .animate-pop + pop. */
+.sx-pop { animation: sx-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes sx-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sx-tap-flash, .sx-pop { animation: none; }
+}
