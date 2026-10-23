@@ -1,0 +1,65 @@
+/* css/features/telegram.css — sidebar WhatsApp channel button in the video
+ * rail. Modern glass circle + official WhatsApp green glyph + static
+ * "Let's Chat" label. Button-only scope (no popup overlay / tracker logic). */
+
+/* --- WhatsApp rail action button --- */
+.action-btn.whatsapp-action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.action-btn.whatsapp-action-btn:hover {
+  transform: scale(1.1);
+}
+
+.action-btn.whatsapp-action-btn:active {
+  transform: scale(0.97);
+}
+
+/* Icon circle with official WhatsApp brand color */
+.action-btn.whatsapp-action-btn .wa-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.2);
+  border: 1px solid rgba(37, 211, 102, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.action-btn.whatsapp-action-btn .wa-circle i.fa-whatsapp {
+  font-size: 24px;
+  color: #25D366; /* Official WhatsApp Green */
+  transition: transform 0.2s ease;
+}
+
+.action-btn.whatsapp-action-btn:hover .wa-circle i.fa-whatsapp {
+  transform: scale(1.15);
+}
+
+.action-btn.whatsapp-action-btn:focus-visible {
+  outline: 2px solid rgba(37, 211, 102, 0.8);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action-btn.whatsapp-action-btn,
+  .action-btn.whatsapp-action-btn .wa-circle i.fa-whatsapp {
+    transition: none;
+  }
+  .action-btn.whatsapp-action-btn:hover {
+    transform: none;
+  }
+}

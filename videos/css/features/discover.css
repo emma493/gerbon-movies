@@ -1,0 +1,79 @@
+/* css/features/discover.css — 1:1 NudiTok /discover
+ * (refs/discover page + pasted reference). Desktop top header + left
+ * side menu reuse the trending chrome (identical UI); below is
+ * discover-specific: back pill, max-w-2xl col, H1, hashtag-first
+ * subtitle, pill search, recent searches, Trending-This-Week cards,
+ * Popular Tags cards, All-Hashtags pills, Show-more button.
+ * Palette: surface #121212, elevated #1e1e1e, border #2f2f2f,
+ * primary #fe2c55, primary-accessible #c9213f. */
+.sx-discover { position: fixed; inset: 0; z-index: 90; display: block; background: #121212; overflow-y: auto; overscroll-behavior: contain; }
+.sx-discover[hidden] { display: none; }
+
+.sx-d-back { position: fixed; left: 8px; top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 40; display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 44px; width: auto; padding: 0 16px 0 12px; border-radius: 9999px; background: rgba(0,0,0,.45); backdrop-filter: blur(8px); color: #fff; border: none; cursor: pointer; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.sx-d-back .sx-back-arrow { color: #fe2c55; display: inline-flex; }
+@media (min-width: 1024px) { .sx-d-back { display: none; } }
+/* Mobile menu pill — same system drawer as index.html #menu-btn. */
+.sx-d-menu { position: fixed; right: 8px; top: calc(8px + env(safe-area-inset-top, 0px)); z-index: 40; display: inline-flex; align-items: center; justify-content: center; height: 44px; width: 44px; border-radius: 9999px; background: rgba(0,0,0,.45); backdrop-filter: blur(8px); color: #fff; border: none; cursor: pointer; }
+@media (min-width: 1024px) { .sx-d-menu { display: none; } }
+
+.sx-d-page { min-height: 100vh; background: #121212; padding-top: 64px; padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+@media (min-width: 1024px) { .sx-d-page { padding-bottom: 0; padding-left: 240px; } }
+.sx-d-wrap { max-width: 42rem; margin: 0 auto; padding: 24px 16px; }
+.sx-d-h1 { color: #fff; font-size: 20px; line-height: 28px; font-weight: 700; margin: 0 0 16px; }
+
+/* search */
+.sx-d-search { position: relative; margin-bottom: 24px; }
+.sx-d-search > svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: #8a8a8a; pointer-events: none; }
+.sx-d-q { width: 100%; background: #1e1e1e; border: 1px solid rgba(255,255,255,.1); color: #fff; font-size: 14px; border-radius: 8px; padding: 12px 40px; outline: none; }
+.sx-d-q::placeholder { color: #8a8a8a; }
+.sx-d-q:focus { border-color: rgba(254,44,85,.5); }
+
+/* recent searches */
+.sx-d-recent { margin-bottom: 24px; }
+.sx-d-recent-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.sx-d-recent-title { color: #a0a0a0; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+.sx-d-recent-clear { background: none; border: none; color: #8a8a8a; font-size: 12px; cursor: pointer; padding: 0; }
+.sx-d-recent-clear:hover { color: #fe2c55; }
+.sx-d-recent-row { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 8px; }
+.sx-d-recent-row:hover { background: #1e1e1e; }
+.sx-d-recent-row > svg { width: 16px; height: 16px; color: #8a8a8a; flex: none; }
+.sx-d-recent-term { flex: 1; min-width: 0; background: none; border: none; padding: 0; cursor: pointer; color: #fff; font-size: 14px; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sx-d-recent-x { background: none; border: none; color: #8a8a8a; cursor: pointer; padding: 4px; flex: none; line-height: 1; }
+.sx-d-recent-x:hover { color: #fff; }
+.sx-d-recent-x svg { width: 14px; height: 14px; display: block; }
+
+/* sections */
+.sx-d-secs > div { margin-bottom: 24px; }
+.sx-d-secs > div:last-child { margin-bottom: 0; }
+.sx-d-sec-head { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.sx-d-sec-head > svg { width: 14px; height: 14px; color: #fe2c55; }
+.sx-d-h2 { color: #a0a0a0; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; margin: 0 0 12px; }
+.sx-d-sec-head .sx-d-h2 { margin: 0; }
+.sx-d-allsub { color: #8a8a8a; font-size: 12px; margin: -8px 0 12px; }
+
+/* hashtag cards */
+.sx-d-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+@media (min-width: 640px) { .sx-d-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .sx-d-grid { grid-template-columns: repeat(6, 1fr); } }
+.sx-d-card { position: relative; display: block; aspect-ratio: 3/4; overflow: hidden; border-radius: 12px; background: #1e1e1e; border: none; padding: 0; cursor: pointer; text-align: left; width: 100%; }
+.sx-d-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .2s ease; }
+.sx-d-card video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; }
+.sx-thumb-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+.sx-d-card:hover img, .sx-d-card:hover video { transform: scale(1.05); }
+.sx-d-card-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e1e1e, #121212); color: #fe2c55; font-size: 28px; font-weight: 800; }
+.sx-d-card-meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 24px 8px 8px; background: linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.45), transparent); }
+.sx-d-card-name { display: block; color: #fff; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sx-d-card-count { display: block; color: rgba(255,255,255,.7); font-size: 11px; }
+
+/* all-hashtags pills + show more */
+.sx-d-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.sx-d-pill { display: inline-flex; min-height: 44px; align-items: center; gap: 6px; border-radius: 9999px; background: #1e1e1e; border: 1px solid rgba(255,255,255,.1); padding: 8px 14px; font-size: 12px; color: #fff; cursor: pointer; }
+.sx-d-pill:hover { border-color: rgba(254,44,85,.5); }
+.sx-d-pill .n { font-weight: 500; }
+.sx-d-pill .c { color: #8a8a8a; }
+.sx-d-more { margin-top: 16px; min-height: 44px; width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,.1); background: #1e1e1e; padding: 10px; font-size: 14px; color: #fff; cursor: pointer; }
+.sx-d-more:disabled { opacity: .6; cursor: default; }
+
+/* query / filter video results (tag-page anatomy: 9/16 + play/heart) */
+.sx-d-vidhead { color: #fff; font-size: 14px; font-weight: 600; padding: 4px 0 12px; }
+.sx-discover-empty { color: #8a8a8a; font-size: 14px; text-align: center; padding: 32px 0; }

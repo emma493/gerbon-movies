@@ -1,0 +1,24 @@
+/* css/base.css — design tokens + toast. Loaded after ntok.css. */
+:root {
+  --color-accent-cyan: #25f4ee;
+  --color-accent-saved: #facc15;
+  --color-border: #2f2f2f;
+  --color-primary: #fe2c55;
+  --sx-bg: #000;
+  --sx-surface: #121212;
+  --sx-elev: #1e1e1e;
+}
+.sx-toast {
+  pointer-events: auto;
+  background: rgba(20, 20, 20, 0.95);
+  border: 1px solid #2f2f2f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-top: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s;
+}
+.sx-toast-hide { opacity: 0; }

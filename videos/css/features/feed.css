@@ -1,0 +1,12 @@
+/* css/features/feed.css — feed switcher (For You / Following / Top) as a
+ * bottom sheet that slides from below. */
+.sx-feed-menu { position: fixed; left: 0; right: 0; bottom: 0; z-index: 95; background: #1e1e1e; border-top: 1px solid #2f2f2f; border-top-left-radius: 16px; border-top-right-radius: 16px; overflow: hidden; padding: 8px 8px calc(8px + env(safe-area-inset-bottom, 0px)); box-shadow: 0 -12px 32px rgba(0,0,0,0.6); transform: translateY(105%); transition: transform 0.28s ease; }
+@media (min-width: 768px) { .sx-feed-menu { left: 50%; right: auto; width: 480px; transform: translate(-50%, 105%); } }
+.sx-feed-menu.open { transform: translateY(0); }
+@media (min-width: 768px) { .sx-feed-menu.open { transform: translate(-50%, 0); } }
+.sx-feed-item { display: flex; align-items: center; justify-content: space-between; width: 100%; background: none; border: none; border-radius: 10px; color: #fff; font-size: 15px; font-weight: 600; padding: 14px 16px; cursor: pointer; }
+.sx-feed-item:active { background: rgba(255,255,255,0.06); }
+/* Hide the "For You" label visually while keeping the element in the DOM. */
+#feed-label { opacity: 0; }
+/* Hide the dropdown arrow beside it while keeping it in the DOM. */
+#feed-btn svg { opacity: 0; }

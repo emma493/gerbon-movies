@@ -1,0 +1,124 @@
+/* css/features/guide.css — first-visit swipe tutorial, ported verbatim from
+ * refs/shortieshub_app_fix/index.html (overlay CSS). Fullscreen dim + rising
+ * hand with chevrons and "SWIPE UP" caption. Shown once per visitor
+ * (js/features/guide.js, localStorage hasSeenSwipeTutorial — same key as the
+ * original, so returning visitors are never re-prompted). */
+
+.swipe-tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.swipe-tutorial-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.swipe-tutorial-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.swipe-animation-container {
+    position: relative;
+    width: 100px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Arrows */
+.chevron-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-bottom: 8px;
+}
+
+.chevron-stack i {
+    color: #ffffff;
+    font-size: 20px;
+    animation: chevronPulse 1.4s infinite ease-in-out;
+}
+
+.chevron-stack .c1 { animation-delay: 0s; }
+.chevron-stack .c2 { animation-delay: 0.2s; }
+.chevron-stack .c3 { animation-delay: 0.4s; }
+
+/* Touch point dot */
+.touch-point-dot {
+    width: 14px;
+    height: 14px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #ffffff;
+    margin-bottom: 5px;
+}
+
+/* Hand Icon */
+.hand-icon-box {
+    animation: handSwipeUp 1.4s infinite ease-in-out;
+}
+
+.hand-icon {
+    font-size: 55px;
+    color: #ffffff;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.swipe-text {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Animations */
+@keyframes handSwipeUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateY(-15px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-35px);
+        opacity: 0;
+    }
+}
+
+@keyframes chevronPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chevron-stack i,
+    .hand-icon-box {
+        animation: none;
+    }
+    .swipe-tutorial-overlay {
+        transition: none;
+    }
+}

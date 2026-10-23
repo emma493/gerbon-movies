@@ -1,0 +1,12 @@
+# Netlify + Cloudflare Pages redirects. Publish directory must be the
+# favmoney.site/ folder itself so /ntok.css, /js/..., /discover/... resolve.
+/discover  /discover/  200
+/trending  /trending/  200
+/creators  /  301
+/creator/*  /  301
+/liked  /  301
+/liked/*  /  301
+/saved  /  301
+/saved/*  /  301
+/saved.html  /  301
+/@*  /  301

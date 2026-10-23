@@ -1,0 +1,1021 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Dark theme implementation */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    overflow: hidden;
+    /* Prevents default scroll to control transitions */
+    user-select: none;
+}
+
+.video-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Loader */
+/* --- Tight TikTok Style Loader --- */
+.loader {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    /* Reduced height to keep circles aligned */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.loader::before,
+.loader::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    animation: tiktok-tight 0.8s infinite ease-in-out;
+}
+
+/* Pink Circle */
+.loader::before {
+    background-color: #ff2b54;
+    /* Moves only 10px left/right to stay close */
+    animation-name: tiktok-pink;
+}
+
+/* Cyan Circle */
+.loader::after {
+    background-color: #20d5ec;
+    /* Moves only 10px right/left to stay close */
+    animation-name: tiktok-cyan;
+}
+
+@keyframes tiktok-pink {
+
+    0%,
+    100% {
+        transform: translateX(-8px) scale(1);
+        z-index: 1;
+    }
+
+    50% {
+        transform: translateX(8px) scale(1.1);
+        z-index: 0;
+    }
+}
+
+@keyframes tiktok-cyan {
+
+    0%,
+    100% {
+        transform: translateX(8px) scale(1.1);
+        z-index: 0;
+    }
+
+    50% {
+        transform: translateX(-8px) scale(1);
+        z-index: 1;
+    }
+}
+
+/* Top Navigation */
+.top-nav {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 10;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.for-you {
+    font-weight: 700;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Container Link reset */
+a {
+    text-decoration: none;
+}
+
+/* Red Badge Styling */
+.live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #E62E04;
+    color: #FFFFFF;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(230, 46, 4, 0.4);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    user-select: none;
+}
+
+.live-badge:hover {
+    background-color: #FF3B0F;
+    transform: scale(1.03);
+}
+
+/* SVG Radar Sizing */
+.live-radar-icon {
+    width: 20px;
+    height: 15px;
+    display: block;
+}
+
+/* Blinking Center Dot */
+.radar-dot {
+    animation: liveDotBlink 1.2s infinite ease-in-out;
+    transform-origin: center;
+}
+
+/* Radar Signal Waves Animation */
+.radar-wave {
+    animation: liveWavePulse 1.4s infinite ease-in-out;
+}
+
+.wave-1 {
+    animation-delay: 0.15s;
+}
+
+.wave-2 {
+    animation-delay: 0.35s;
+}
+
+/* Keyframes */
+@keyframes liveDotBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.15;
+    }
+}
+
+@keyframes liveWavePulse {
+    0%, 100% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Profile GIF & Ripple (FIXED FOR CHROME) */
+.profile-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-shrink: 0; /* Prevents Chrome from collapsing profile circle height */
+}
+
+.profile-gif {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #ff2b54;
+    object-fit: cover;
+    z-index: 2;
+    background: #333;
+}
+
+.ripple {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    animation: rippleEffect 1.5s infinite ease-out;
+    z-index: 1;
+}
+
+@keyframes rippleEffect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    animation: slideInRight 0.5s ease forwards;
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+/* Stagger sidebar animations */
+.side-bar .action-btn:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.side-bar .action-btn:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.side-bar .action-btn:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.side-bar .action-btn:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.action-btn i {
+    font-size: 32px;
+    margin-bottom: 6px;
+    transition: transform 0.2s ease;
+}
+
+/* Like Animations */
+.action-btn.liked i {
+    color: #ff2b54;
+}
+
+.animate-pop {
+    animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.4);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Big Double Tap Heart */
+.big-heart {
+    position: absolute;
+    color: #ff2b54;
+    font-size: 100px;
+    opacity: 0;
+    transform: scale(0) rotate(-15deg);
+    pointer-events: none;
+    z-index: 20;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+.big-heart.active {
+    animation: doubleTapPop 0.8s forwards ease-out;
+}
+
+@keyframes doubleTapPop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0) rotate(-15deg);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.5) rotate(15deg);
+    }
+}
+
+/* Bottom Info Section */
+.bottom-info {
+    position: absolute;
+    bottom: 30px;
+    left: 15px;
+    z-index: 10;
+    max-width: 75%;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.user-name {
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.verified {
+    color: #20D5EC;
+    font-size: 14px;
+}
+
+.caption {
+    font-size: 15px;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+/* Tutorial Overlay */
+.tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.finger-icon {
+    font-size: 32px;
+    color: #fff;
+    margin-bottom: 5px !important;
+    display: inline-block;
+}
+
+.tutorial-overlay p {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+@keyframes swipeUp {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+}
+
+/* Custom Progress Bar Styling */
+.progress-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.progress-fill {
+  height: 100%;
+  background: #ff0050;
+  width: 0%;
+}
+
+.video-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    width: 103px;
+    height: 26px;
+}
+
+.video-player-controls {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+}
+
+.progress-wrapper {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.video-progress-bar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    outline: none;
+    margin: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.progress-fill {
+    position: absolute;
+    height: 100%;
+    background: #ffffff;
+    width: 0%;
+    border-radius: 2px;
+    z-index: 1;
+    pointer-events: none;
+    transition: width 0.1s linear;
+}
+
+.video-progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.progress-wrapper:hover .video-progress-bar::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+.timer-text {
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.feedback-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: rgba(255, 255, 255, 0.6);
+    pointer-events: none;
+    z-index: 100;
+    animation: icon-pop 0.6s ease-out forwards;
+}
+
+@keyframes icon-pop {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+#main-video {
+    pointer-events: auto;
+    cursor: pointer;
+}
+
+.play-pause-feedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 70px;
+    color: rgba(255, 255, 255, 0.85);
+    pointer-events: none;
+    z-index: 100;
+    animation: icon-pop-fade 0.6s ease-out forwards;
+}
+
+@keyframes icon-pop-fade {
+    0% {
+        transform: translate(-50%, -50%) scale(0.6);
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0;
+    }
+}
+
+/* --- Right Sidebar Alignment (FIXED POSITION) --- */
+.side-bar {
+    position: absolute;
+    right: 12px;
+    bottom: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    z-index: 10;
+    height: auto;
+    max-height: calc(100vh - 120px);
+}
+
+/* --- Get App Button Positioning --- */
+.get-app-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    margin-top: 2px;
+    cursor: pointer;
+}
+
+.app-icon-badge {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.get-app-btn:active .app-icon-badge {
+    transform: scale(0.92);
+}
+
+.android-icon {
+    font-size: 30px;
+    color: #3DDC84;
+    filter: drop-shadow(0 0 6px rgba(61, 220, 132, 0.5));
+}
+
+/* --- Custom Wide Dash Arrow --- */
+.custom-dash-arrow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    pointer-events: none;
+    filter: drop-shadow(0 0 6px #ff9900) drop-shadow(0 0 12px #ff6600);
+    animation: bounceWholeArrow 1.2s infinite ease-in-out;
+}
+
+.arrow-dash, .arrow-main {
+    transition: opacity 0.2s ease;
+}
+
+@keyframes bounceWholeArrow {
+    0%, 100% {
+        transform: translate(-50%, -70%);
+        filter: drop-shadow(0 0 4px #ff9900) drop-shadow(0 0 8px rgba(255, 102, 0, 0.8));
+    }
+    50% {
+        transform: translate(-50%, -30%);
+        filter: drop-shadow(0 0 8px #ffaa00) drop-shadow(0 0 16px rgba(255, 51, 0, 1));
+    }
+}
+
+.custom-dash-arrow .dash-1 {
+    animation: dashCascade 1.2s infinite ease-in-out;
+    animation-delay: 0.1s;
+}
+
+.custom-dash-arrow .dash-2 {
+    animation: dashCascade 1.2s infinite ease-in-out;
+    animation-delay: 0.05s;
+}
+
+@keyframes dashCascade {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translateY(-2px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(2px);
+    }
+}
+
+.get-app-text {
+    margin-top: -2px;
+    line-height: 1;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Desktop Layout Alignment (FIXED FOR CHROME) --- */
+@media (min-width: 1024px) {
+
+    body,
+    html {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+    }
+
+    .video-container {
+        height: 100vh;
+        aspect-ratio: 9 / 16;
+        width: auto;
+        margin: 0 auto;
+        border-radius: 0;
+        border: none;
+        box-shadow: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    video {
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .top-nav {
+        width: 100%;
+        max-width: calc(100vh * 9 / 16);
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0 20px;
+        top: 25px;
+    }
+
+    .side-bar {
+        right: 12px;
+        bottom: 80px;
+        gap: 14px;
+    }
+
+    .bottom-info {
+        left: 20px;
+        bottom: 40px;
+    }
+}
+
+/* --- Glowing 3D WhatsApp Button & Alternating Text --- */
+.action-btn.telegram-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 2px;
+}
+
+/* 3D App Icon Badge (WhatsApp Green Gradient) */
+.telegram-icon-badge {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    /* Pulsing Scale & Glow Animation */
+    animation: waIconPulse 1.8s infinite ease-in-out;
+}
+
+.whatsapp-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+/* Pulsing (Size Increment & Decrement with WhatsApp Green Glow) */
+@keyframes waIconPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 6px rgba(37, 211, 102, 0.6), 0 4px 10px rgba(0, 0, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.22);
+        box-shadow: 0 0 18px rgba(37, 211, 102, 1), 0 0 30px rgba(18, 140, 126, 0.8), 0 6px 14px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* --- Animated Alternating Text ("Chat on" <-> "WhatsApp") --- */
+.telegram-text-switcher {
+    position: relative;
+    height: 14px;
+    width: 60px;
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tg-text {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    white-space: nowrap;
+}
+
+/* Cross-fade & Slide Keyframes */
+.text-join {
+    animation: toggleJoin 4s infinite ease-in-out;
+}
+
+.text-app {
+    animation: toggleWhatsApp 4s infinite ease-in-out;
+}
+
+@keyframes toggleJoin {
+    0%, 45% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    50%, 95% {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.85);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes toggleWhatsApp {
+    0%, 45% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.85);
+    }
+    50%, 95% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.85);
+    }
+}
+
+/* Get App Animation */
+/* --- Animated Alternating Text for Get App ("Get" <-> "App") --- */
+.app-text-switcher {
+    position: relative;
+    height: 14px;
+    width: 60px;
+    margin-top: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-text {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.3px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 8px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    white-space: nowrap;
+}
+
+/* Cross-fade & Slide Keyframes */
+.text-get {
+    animation: toggleGet 4s infinite ease-in-out;
+}
+
+.text-app {
+    animation: toggleApp 4s infinite ease-in-out;
+}
+
+@keyframes toggleGet {
+    0%, 45% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    50%, 95% {
+        opacity: 0;
+        transform: translateY(-6px) scale(0.85);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes toggleApp {
+    0%, 45% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.85);
+    }
+    50%, 95% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(6px) scale(0.85);
+    }
+}
+
+/* --- WhatsApp Popup Overlay --- */
+.tg-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.tg-overlay.active {
+  opacity: 1;
+}
+
+/* Floating Content Wrapper */
+.tg-popup-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: none;
+  transform: scale(0.85);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tg-overlay.active .tg-popup-card {
+  transform: scale(1);
+}
+
+/* Modal Icon Badge */
+.tg-popup-icon-badge {
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  box-shadow: 0 0 18px rgba(37, 211, 102, 0.8);
+  margin-bottom: 16px;
+  pointer-events: auto;
+}
+
+.tg-popup-icon-badge .whatsapp-svg {
+  width: 44px;
+  height: 44px;
+}
+
+/* Modal Action Button */
+.tg-modal-btn {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #25D366 0%, #075E54 100%);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  pointer-events: auto;
+}
+
+.tg-modal-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.7);
+}
+
+/* Reverse Loading Bar */
+.tg-progress-bar-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tg-progress-bar-fill {
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  box-shadow: 0 0 8px #ffffff;
+  transform-origin: left center;
+  transition: width 0.1s linear;
+}
+
+/* Notifications opt-in banner removed. */
